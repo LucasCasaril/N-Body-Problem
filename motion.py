@@ -35,22 +35,22 @@ def dydt(y, t, m): #For the use of the odeint integrator
      z_t = np.transpose(z_position)
 
      # Usind python's vectorization to create a matrix
-     dx = x_t - x_position 
-     dy = y_t - y_position 
-     dz = z_t - z_position
+     vector_x = x_t - x_position 
+     vector_y = y_t - y_position 
+     vector_z = z_t - z_position
 
-     # We use a 
-     softening = 0.0001
-     r3_inv = (dx**2 + dy**2 + dz**2 + softening**2)
+     # We use a differential distance dr to help resolt of the inverse when the numbers are too small and to big
+     dr = 0.0001
+     r3_inv = (vector_x**2 + vector_y**2 + vector_z**2 + dr**2)
      r3_inv[r3_inv>0] = r3_inv[r3_inv>0]**(-1.5)
 
-     ax = G * (dx * mass) * r3_inv
+     ax = G * (vector_x * mass) * r3_inv
      ax = [sum(e) for e in ax]
 
-     ay = G * (dy * mass) * r3_inv
+     ay = G * (vector_y * mass) * r3_inv
      ay = [sum(e) for e in ay]
 
-     az = G * (dz * mass) * r3_inv
+     az = G * (vector_z * mass) * r3_inv
      az = [sum(e) for e in az]
 
      accel = []

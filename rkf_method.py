@@ -24,7 +24,7 @@ c5 = [16/135,  0,  6656/12825,  28561/56430,  -9/50,  2/55] # For RK5
 import numpy as np
 from motion import dydt
 
-def rkf_integration(dydt, t0, tf, y0, G, m, tol, h):
+def rkf_integration(dydt, t0, tf, y0, m, tol, h):
 
      # Initial Conditions
      t = t0
@@ -38,12 +38,12 @@ def rkf_integration(dydt, t0, tf, y0, G, m, tol, h):
      while t < tf:
           h_old = h
 
-          k1 = h * dydt(t, y, G, m)
-          k2 = h * dydt(t + h/4, y + k1/4, G, m)
-          k3 = h * dydt(t + (3*h)/8, y + (3*k1)/32 + (9*k2)/32, G, m)
-          k4 = h * dydt(t + (12*h)/13, y + (1932*k1)/2197 - (7200*k2)/2197 + (7296*k3)/2197, G, m)
-          k5 = h * dydt(t + h, y + (439*k1)/216 - 8*k2 + (3680*k3)/513 - (845*k4)/4104, G, m)
-          k6 = h * dydt(t + h/2, y - (8*k1)/27 + 2*k2 - (3544*k3)/2565 + (1859*k4)/4104 - (11*k5)/40, G, m)
+          k1 = h * dydt(t, y, m)
+          k2 = h * dydt(t + h/4, y + k1/4, m)
+          k3 = h * dydt(t + (3*h)/8, y + (3*k1)/32 + (9*k2)/32, m)
+          k4 = h * dydt(t + (12*h)/13, y + (1932*k1)/2197 - (7200*k2)/2197 + (7296*k3)/2197, m)
+          k5 = h * dydt(t + h, y + (439*k1)/216 - 8*k2 + (3680*k3)/513 - (845*k4)/4104, m)
+          k6 = h * dydt(t + h/2, y - (8*k1)/27 + 2*k2 - (3544*k3)/2565 + (1859*k4)/4104 - (11*k5)/40, m)
 
 
           y_order4 = y + ((25*k1)/216 + (1408*k3)/2565 + (2197*k4)/4104 - k5/5)
