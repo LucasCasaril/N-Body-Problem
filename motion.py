@@ -10,8 +10,8 @@ Author: Lucas Casaril
 import numpy as np
 from numpy.linalg import norm
 
-#def dydt(t , y, m):
-def dydt(y, t, m): #For the use of the odeint integrator
+def dydt(t , y, m):
+#def dydt(y, t, m): #For the use of the odeint integrator
 
      G = 6.67259e-20 #Universal Gravitational Constant (km^3/kg/s^2)
 
